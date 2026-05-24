@@ -1,57 +1,204 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+/*============================================
+    1. การตั้งค่าพื้นฐาน (Reset & Base Styles)
+=========================================== */
 
-/* Universal Reset - สั่งทุกตัวให้เริ่มที่ 0 */
 * {
+    /* Box Model: ให้ padding และ border รวมอยู่ในขนาด width/height ที่กำหนด ป้องกันปัญหา element ล้น */
+    box-sizing: border-box;
     margin: 0;
     padding: 0;
-    box-sizing: border-box; /* ทำให้ padding ไม่ไปดันขนาดกล่องให้เพี้ยน */
-    font-family: 'Poppins', sans-serif;
-}
-
-:root {
-    --primary-color: #25343F; /* สีหลัก */
-    --text-color: #FF9B51;
-    --bg-color: #EAEFEF;
 }
 
 body {
-    height: 100vh; /* 100vh=สูงเต็มจอ*/
-    background: var(--primary-color);
+    /* เลือกฟอนต์พื้นฐานที่อ่านง่าย */
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif; 
+    color: #222;
+    line-height: 1.5;
 }
 
-.navbar {
-    display: flex; /* เปิดโหมด flex */
-    align-items: center; /* กึ่งกลางแนวตั้ง */
-    justify-content: space-between; /* กระจายซ้ายขวา (ใช้บ่อยกับ navbar) */
-    height: 80px;
-    padding: 0 50px;
+/* คอนเทนเนอร์หลัก กำหนดความกว้างสูงสุดและจัดให้อยู่กึ่งกลางหน้าจอ */
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px;
 }
 
-.navbar h2 {
-    color: var(--text-color);
-    font-weight: 600;
+/* ==================================
+    2. ส่วนหัว (Header) - ใช้ Flexbox
+=================================== */
+.header {
+    display: flex; /*ใช้ Flexbox เพื่อจัดให้เรียงแนวนอน*/
+    justify-content: space-between; /* ดันโลโก้ไปซ้ายสุด เมนูไปขวาสุด */
+    align-items: center; /* จัดให้อยู่กึ่งกลางในแนวตั้ง */
+    padding: 20px 0;
 }
 
-.navbar ul {
+.logo {
     display: flex;
+    align-items: center;
+    gap: 10px; /* ระยะห่างระหว่างกล่องดำกับชื่อ */
+    font-weight: bold;
 }
 
-.navbar ul li {
-    list-style: none; /* ลบ bullet ออก */
+/* กล่องสีดำจำลองโลโก้ */
+.logo-box {
+    width: 20px;
+    height: 20px;
+    background-color: #222;
+    border-radius: 4px;
 }
 
-.navbar ul li a {
-    text-decoration: none; /* ลบเส้นใต้ของลิงก์ */
-    color: var(--bg-color);
-    font-size: 16px;
-    margin-right: 25px; /* ระยะห่างภายนอกทางขวา */
-    transition: color 0.5s ease; /* เปลี่ยนสีใน 0.5 วินาที อย่างนุ่มนวล */
+.nav a {
+    text-decoration: none;
+    color: #222;
+    margin: 0 5px;
 }
 
-.navbar ul li:hover a {
-    color: var(--text-color); /* เมื่อ hover จะเปลี่ยนสี */
+/* ===============================
+    3. ส่วนแนะนำตัว (Hero)
+================================ */ 
+.hero {
+    text-align: center; /* จัดข้อความให้อยู่กึ่งกลาง */
+    margin: 60px 0; /* ระยะห่างบน - ล่าง */
 }
 
-.navbar ul li:last-child a {
-    margin: 0;
+.hero h1 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.hero p {
+    color: #888; /* ทำให้ตัวหนังสือสีเทาอ่อนลง */
+}
+
+/* =========================================
+    4. ส่วนเนื้อหาหลัก 3 คอลัมน์ - ใช้ CSS Grid
+========================================== */
+.main-content {
+    display: grid; /* เปิดใช้งาน CSS Grid */
+    grid-template-columns: 1fr 1fr 1.2fr; /* แบ่งเป็น 3 คอลัมน์ (คอลัมน์ขวาสุดกว้างกว่านิดหน่อย) */
+    border-top: 2px solid #222; /* เส้นขอบด้านบนของตาราง */
+    border-bottom: 2px solid #222; /* เส้นขอบด้านล่างของตาราง */
+    margin-bottom: 50px;
+}
+
+.col {
+    padding: 20px;
+}
+
+/* สร้างเส้นแบ่งระหว่างคอลัมน์ 1 และ 2 */
+.projects-col, .middle-col {
+    border-right: 1px solid #222;
+}
+
+.col h2 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+/* สไตล์ลิสต์ของ Projects */
+.project-list {
+    list-style: none; /* เอาจุดหน้า list ออก */
+}
+
+.project-list li {
+    padding: 10px 0;
+    border-bottom: 1px solid #ccc; /* เส้นขอบกั้นระหว่างโปรเจกต์ */
+    font-size: 0.9rem;
+}
+
+/* แบ่งส่วน Experience และ OpenSource */
+.opensource {
+    border-top: 1px solid #222; /* เส้นกั้นแนวนอนตรงกลาง */
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.link {
+    display: inline-block;
+    margin-top: 10px;
+    color: #0066cc;
+    text-decoration: none;
+    font-size: 0.8rem;
+}
+
+/* สไตล์ลิสต์ Education */
+.course-title {
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+.course-list {
+    list-style: none;
+    font-size: 0.9rem;
+}
+
+/* ====================================
+    5. ส่วนรีวิว (Reviews) - ใช้ Flexbox
+===================================== */
+.reviews {
+    margin-bottom: 50px;
+}
+
+.reviews h2 {
+    margin-bottom: 20px;
+}
+
+.review-cards {
+    display: flex; /* ใช้ Flexbox เรียงการ์ดแนวนอน */
+    gap: 20px; /* ระยะห่างระหว่างการ์ด */
+}
+
+.card {
+    flex: 1; /* ให้การ์ดทุกใบขยายขนาดเท่าๆ กัน */
+    border: 1px solid #222; /* เส้นขอบของการ์ด */
+    border-radius: 20px; /* ขอบมุมโค้งมน */
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* ให้เนื้อหาในการ์ดเรียงจากบนลงล่าง */
+    justify-content: space-between; /* ดันข้อความไปด้านบน ดันชื่อคนรีวิวไปด้านล่าง */
+}
+
+.review-text {
+    font-size: 0.9rem;
+    margin-bottom: 20px;
+}
+
+.reviewer {
+    font-size: 0.9rem;
+    color: #ccc; /* สีเทาอ่อน */
+}
+
+/* ======================
+    6. ส่วนท้าย (Footer)
+====================== */
+.footer {
+    text-align: center;
+    font-weight: bold;
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+/* ================================================
+    7. Media Queries (ทำให้รองรับมือถือ / Responsive)
+================================================= */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column; /* เปลี่ยน header ให้เรียงแนวตั้ง */
+        gap: 15px;
+    }
+
+    .main-content {
+        grid-template-columns: 1fr; /* เปลี่ยนตาราง 3 คอลัมน์ ให้เหลือ 1 คอลัมน์ (เรียงลงมา) */
+        border: 2px solid #222; /* ใส่กรอบล้อมรอบแทน */
+    }
+
+    .projects-col, .middle-col {
+        border-right: none; /* เอาเส้นกั้นแนวตั้งออก */
+        border-bottom: 2px solid #222; /* ใส่เส้นกั้นแนวนอนแทน */
+    }
+
+    .review-cards {
+        flex-direction: column; /* เปลี่ยนการ์ดรีวิวให้เรียงลงมาด้านล่าง */
+    }
 }
